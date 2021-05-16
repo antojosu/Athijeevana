@@ -1,6 +1,6 @@
 # athijeevana
 
-A new Flutter project.
+Athijeevana is an Android app where people can add requirements needed in the covid situation like oxygen supply, food and so on. Also, users should be able to see requirements around them and contact them. 
 
 ## Getting Started
 
