@@ -1,4 +1,4 @@
-import 'package:athijeevana/screens/phonenumber.dart';
+import 'package:athijeevana/screens/StartScreen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -8,6 +8,6 @@ void main() {
 class AthiJeevanaMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: PhoneNumber());
+    return MaterialApp(debugShowCheckedModeBanner: false, home: StartScreen());
   }
 }
