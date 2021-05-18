@@ -1,8 +1,13 @@
 import 'dart:ui';
 
+import 'package:athijeevana/widgets/EnterNumberWidget.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/NumberPad.dart';
+import '../widgets/NumberPad.dart';
+import '../widgets/NumberPad.dart';
 
 class PhoneNumber extends StatefulWidget {
   @override
@@ -29,16 +34,16 @@ class _PhoneNumberState extends State<PhoneNumber> {
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
-            return portraitMode();
+            return portraitMode(context);
           } else {
-            return Container();
+            return landscapeMode(context);
           }
         },
       ),
     );
   }
 
-  Widget portraitMode() {
+  Widget portraitMode(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.5),
       child: Column(
@@ -55,63 +60,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
             ),
           ),
           SizedBox(height: 22.5),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                child: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Enter your number',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(width: 12.0),
-                      Text(
-                        '+91 $number',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(width: 35.0),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.yellow,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(15),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Center(
-                      child: Text(
-                        'Continue',
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
+          enterNum(number),
           SizedBox(height: 15),
           NumberPad(onNumSelect: (value) {
             setState(() {
@@ -130,4 +79,95 @@ class _PhoneNumberState extends State<PhoneNumber> {
       ),
     );
   }
+
+  Widget landscapeMode(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.5),
+      child: Container(
+        child: Column(
+          children: [
+            enterNum(number),
+            Row(
+              children: [
+                Column(
+                  children: [
+                    SizedBox(height: 17.5),
+                    Image.asset(
+                      'assets/images/phone.png',
+                      width: MediaQuery.of(context).size.width * 0.40,
+                    ),
+                    SizedBox(height: 20),
+                    Center(
+                      child: Text(
+                        'You will recieve a 4 digit code to verify next',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    )
+                  ],
+                ),
+                Flexible(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 12, top: 5),
+                    child: NumberPad(onNumSelect: (value) {
+                      setState(() {
+                        if (value != -1) {
+                          if (number.length != 10) {
+                            number = number + value.toString();
+                          }
+                        } else {
+                          if (number.length != 0) {
+                            number = number.substring(0, number.length - 1);
+                          }
+                        }
+                      });
+                    }),
+                  ),
+                )
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
 }
+/*
+
+Widget landscapeMode() {
+  return Padding(
+    padding: const EdgeInsets.all(16.5),
+    child: Column(
+      children: <Widget>[
+        Image.asset('assets/images/phone.png'),
+        SizedBox(height: 17.5),
+        Center(
+          child: Text(
+            'You will recieve a 4 digit code to verify next',
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
+          ),
+        ),
+        SizedBox(height: 22.5),
+        enterNum(number),
+        SizedBox(height: 15),
+        NumberPad(onNumSelect: (value) {
+          setState(() {
+            if (value != -1) {
+              if (number.length != 10) {
+                number = number + value.toString();
+              }
+            } else {
+              if (number.length != 0) {
+                number = number.substring(0, number.length - 1);
+              }
+            }
+          });
+        })
+      ],
+    ),
+  );
+}
+*/

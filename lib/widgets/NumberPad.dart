@@ -11,7 +11,6 @@ class NumberPad extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * .10,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,7 +18,6 @@ class NumberPad extends StatelessWidget {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * .10,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,7 +25,6 @@ class NumberPad extends StatelessWidget {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * .10,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +32,6 @@ class NumberPad extends StatelessWidget {
           ),
         ),
         Container(
-          height: MediaQuery.of(context).size.height * .10,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +47,7 @@ class NumberPad extends StatelessWidget {
       child: GestureDetector(
         onTap: () => onNumSelect(-1),
         child: Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(15),
             margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
             decoration: BoxDecoration(
                 color: Colors.amberAccent[400],
