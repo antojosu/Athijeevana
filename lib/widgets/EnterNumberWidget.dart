@@ -35,21 +35,26 @@ Widget enterNum(String number) {
       ),
       SizedBox(width: 35.0),
       Expanded(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.yellow,
-            borderRadius: BorderRadius.all(
-              Radius.circular(15),
+        child: InkWell(
+          onTap: () {
+            print("object");
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.yellow,
+              borderRadius: BorderRadius.all(
+                Radius.circular(15),
+              ),
             ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(18.0),
-            child: Center(
-              child: Text(
-                'Continue',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: const EdgeInsets.all(18.0),
+              child: Center(
+                child: Text(
+                  'Continue',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

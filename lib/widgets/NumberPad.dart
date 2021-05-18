@@ -48,14 +48,14 @@ class NumberPad extends StatelessWidget {
         onTap: () => onNumSelect(-1),
         child: Container(
             padding: EdgeInsets.all(15),
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
             decoration: BoxDecoration(
                 color: Colors.amberAccent[400],
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             child: Center(
               child: Icon(
                 Icons.backspace,
-                size: 28,
+                size: 14,
                 color: Color(0xFF1F1F1F),
               ),
             )),
@@ -69,14 +69,14 @@ class NumberPad extends StatelessWidget {
         onTap: () => onNumSelect(content),
         child: Container(
           padding: EdgeInsets.all(10),
-          margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
           decoration: BoxDecoration(
               color: Colors.amberAccent[400],
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: Center(
               child: Text(
             content.toString(),
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           )),
         ),
       ),

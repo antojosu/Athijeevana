@@ -5,10 +5,6 @@ import 'package:athijeevana/widgets/NumberPad.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/NumberPad.dart';
-import '../widgets/NumberPad.dart';
-import '../widgets/NumberPad.dart';
-
 class PhoneNumber extends StatefulWidget {
   @override
   _PhoneNumberState createState() => _PhoneNumberState();
@@ -34,9 +30,9 @@ class _PhoneNumberState extends State<PhoneNumber> {
       body: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
-            return portraitMode(context);
+            return SingleChildScrollView(child: portraitMode(context));
           } else {
-            return landscapeMode(context);
+            return SingleChildScrollView(child: landscapeMode(context));
           }
         },
       ),
@@ -48,20 +44,25 @@ class _PhoneNumberState extends State<PhoneNumber> {
       padding: const EdgeInsets.all(16.5),
       child: Column(
         children: <Widget>[
-          Image.asset('assets/images/phone.png'),
+          Image.asset(
+            'assets/images/phone.png',
+            height: MediaQuery.of(context).size.height * 0.20,
+          ),
           SizedBox(height: 17.5),
           Center(
             child: Text(
-              'You will recieve a 4 digit code to verify next',
+              'An OTP will be sent to verify the Mobile Number',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w400),
             ),
           ),
           SizedBox(height: 22.5),
           enterNum(number),
-          SizedBox(height: 15),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.04,
+          ),
           NumberPad(onNumSelect: (value) {
             setState(() {
               if (value != -1) {
@@ -110,7 +111,10 @@ class _PhoneNumberState extends State<PhoneNumber> {
                 ),
                 Flexible(
                   child: Container(
-                    margin: EdgeInsets.only(left: 12, top: 5),
+                    margin: EdgeInsets.only(
+                      left: 12,
+                      top: MediaQuery.of(context).size.height * 0.10,
+                    ),
                     child: NumberPad(onNumSelect: (value) {
                       setState(() {
                         if (value != -1) {
@@ -134,40 +138,3 @@ class _PhoneNumberState extends State<PhoneNumber> {
     );
   }
 }
-/*
-
-Widget landscapeMode() {
-  return Padding(
-    padding: const EdgeInsets.all(16.5),
-    child: Column(
-      children: <Widget>[
-        Image.asset('assets/images/phone.png'),
-        SizedBox(height: 17.5),
-        Center(
-          child: Text(
-            'You will recieve a 4 digit code to verify next',
-            style: TextStyle(
-                color: Colors.white, fontSize: 20, fontWeight: FontWeight.w400),
-          ),
-        ),
-        SizedBox(height: 22.5),
-        enterNum(number),
-        SizedBox(height: 15),
-        NumberPad(onNumSelect: (value) {
-          setState(() {
-            if (value != -1) {
-              if (number.length != 10) {
-                number = number + value.toString();
-              }
-            } else {
-              if (number.length != 0) {
-                number = number.substring(0, number.length - 1);
-              }
-            }
-          });
-        })
-      ],
-    ),
-  );
-}
-*/
