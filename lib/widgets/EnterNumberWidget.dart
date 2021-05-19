@@ -1,7 +1,10 @@
+import 'package:athijeevana/screens/verify.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-Widget enterNum(String number) {
+Widget enterNum(String number, BuildContext context) {
   return Row(
+    mainAxisSize: MainAxisSize.min,
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     crossAxisAlignment: CrossAxisAlignment.center,
     children: <Widget>[
@@ -15,7 +18,7 @@ Widget enterNum(String number) {
                 'Enter your number',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 2.5.h,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -25,7 +28,7 @@ Widget enterNum(String number) {
                 '+91 $number',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  fontSize: 3.0.h,
                   color: Colors.white,
                 ),
               ),
@@ -33,11 +36,16 @@ Widget enterNum(String number) {
           ),
         ),
       ),
-      SizedBox(width: 35.0),
+      SizedBox(width: 5.0.w),
       Expanded(
         child: InkWell(
           onTap: () {
-            print("object");
+            //if (number.length == 10) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => VerifyPhone(phoneNumber: number)));
+            //  }
           },
           child: Container(
             decoration: BoxDecoration(
@@ -46,13 +54,14 @@ Widget enterNum(String number) {
                 Radius.circular(15),
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(18.0),
+            child: SizedBox(
+              width: 3.w,
+              height: 7.h,
               child: Center(
                 child: Text(
                   'Continue',
                   style: TextStyle(
-                    fontSize: 18.0,
+                    fontSize: 5.w,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

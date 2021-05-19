@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:athijeevana/screens/verify.dart';
 import 'package:athijeevana/widgets/EnterNumberWidget.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,8 +60,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
                   fontWeight: FontWeight.w400),
             ),
           ),
-          SizedBox(height: 22.5),
-          enterNum(number),
+          SizedBox(height: Adaptive.w(5)),
+          enterNum(number, context),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
           ),
@@ -82,58 +84,59 @@ class _PhoneNumberState extends State<PhoneNumber> {
   }
 
   Widget landscapeMode(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.5),
-      child: Container(
-        child: Column(
-          children: [
-            enterNum(number),
-            Row(
-              children: [
-                Column(
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: enterNum(number, context),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FittedBox(
+                child: Column(
                   children: [
                     SizedBox(height: 17.5),
                     Image.asset(
                       'assets/images/phone.png',
                       width: MediaQuery.of(context).size.width * 0.40,
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 2.w),
                     Center(
                       child: Text(
                         'You will recieve a 4 digit code to verify next',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 3.w,
                             fontWeight: FontWeight.w400),
                       ),
                     )
                   ],
                 ),
-                Flexible(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                      left: 12,
-                      top: MediaQuery.of(context).size.height * 0.10,
-                    ),
-                    child: NumberPad(onNumSelect: (value) {
-                      setState(() {
-                        if (value != -1) {
-                          if (number.length != 10) {
-                            number = number + value.toString();
-                          }
-                        } else {
-                          if (number.length != 0) {
-                            number = number.substring(0, number.length - 1);
-                          }
-                        }
-                      });
-                    }),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
+              ),
+              SizedBox(
+                width: 3.w,
+              ),
+              Flexible(
+                child: NumberPad(onNumSelect: (value) {
+                  setState(() {
+                    if (value != -1) {
+                      if (number.length != 10) {
+                        number = number + value.toString();
+                      }
+                    } else {
+                      if (number.length != 0) {
+                        number = number.substring(0, number.length - 1);
+                      }
+                    }
+                  });
+                }),
+              )
+            ],
+          )
+        ],
       ),
     );
   }
