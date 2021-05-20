@@ -5,8 +5,8 @@ Widget buildCodeNumberBox(String codeNumber) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: 8),
     child: SizedBox(
-      width: 10.w,
-      height: 10.h,
+      width: 8.w,
+      height: 4.h,
       child: Container(
         decoration: BoxDecoration(
           color: Color(0xFFF6F5FA),

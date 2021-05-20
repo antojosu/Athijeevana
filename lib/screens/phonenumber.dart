@@ -1,7 +1,6 @@
 import 'dart:ui';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:athijeevana/screens/verify.dart';
 import 'package:athijeevana/widgets/EnterNumberWidget.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,9 +12,41 @@ class PhoneNumber extends StatefulWidget {
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
+  bool _initialized = false;
+  bool _error = false;
   String number = "";
+  void initializeFlutterFire() async {
+    try {
+      // Wait for Firebase to initialize and set `_initialized` state to true
+      await Firebase.initializeApp();
+      setState(() {
+        _initialized = true;
+      });
+    } catch (e) {
+      // Set `_error` state to true if Firebase initialization fails
+      setState(() {
+        _error = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_error) {
+      return Text("Error");
+    }
+
+    // Show a loader until FlutterFire is initialized
+    if (!_initialized) {
+      return Text("Loading");
+    }
+
     return Scaffold(
       backgroundColor: Colors.deepPurple[800],
       appBar: AppBar(
@@ -50,20 +81,24 @@ class _PhoneNumberState extends State<PhoneNumber> {
             'assets/images/phone.png',
             height: MediaQuery.of(context).size.height * 0.20,
           ),
-          SizedBox(height: 17.5),
+          SizedBox(
+            height: 1.h,
+          ),
           Center(
             child: Text(
               'An OTP will be sent to verify the Mobile Number',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 2.h,
                   fontWeight: FontWeight.w400),
             ),
           ),
-          SizedBox(height: Adaptive.w(5)),
+          SizedBox(
+            height: 4.h,
+          ),
           enterNum(number, context),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.04,
+            height: 1.h,
           ),
           NumberPad(onNumSelect: (value) {
             setState(() {
@@ -93,7 +128,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
             child: enterNum(number, context),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               FittedBox(
                 child: Column(
@@ -106,7 +141,7 @@ class _PhoneNumberState extends State<PhoneNumber> {
                     SizedBox(height: 2.w),
                     Center(
                       child: Text(
-                        'You will recieve a 4 digit code to verify next',
+                        'You will recieve a 6 digit code to verify next',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 3.w,
@@ -115,9 +150,6 @@ class _PhoneNumberState extends State<PhoneNumber> {
                     )
                   ],
                 ),
-              ),
-              SizedBox(
-                width: 3.w,
               ),
               Flexible(
                 child: NumberPad(onNumSelect: (value) {

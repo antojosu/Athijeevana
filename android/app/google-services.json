@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "879409279198",
+    "project_id": "athijeevana-43471",
+    "storage_bucket": "athijeevana-43471.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879409279198:android:f682c6c98ebf5de8fed24f",
+        "android_client_info": {
+          "package_name": "com.example.athijeevana"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879409279198-jhbt2jggr43qi0hicosq1t6d8nr81vv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.athijeevana",
+            "certificate_hash": "6504af2694e4553dead9fd661f0464da5559f9da"
+          }
+        },
+        {
+          "client_id": "879409279198-hqns7335dj4k4p476cgcl2gde7vnrh8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVwN966vciAkgdHsgwQGcWQ48MXGx6Npk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879409279198-hqns7335dj4k4p476cgcl2gde7vnrh8g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

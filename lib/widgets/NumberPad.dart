@@ -8,11 +8,12 @@ class NumberPad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Container(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildButton(1, context),
@@ -23,6 +24,7 @@ class NumberPad extends StatelessWidget {
         ),
         Container(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildButton(4, context),
@@ -33,6 +35,7 @@ class NumberPad extends StatelessWidget {
         ),
         Container(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildButton(7, context),
@@ -43,6 +46,7 @@ class NumberPad extends StatelessWidget {
         ),
         Container(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               blankButton(context),

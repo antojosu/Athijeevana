@@ -18,7 +18,7 @@ Widget enterNum(String number, BuildContext context) {
                 'Enter your number',
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: 2.5.h,
+                  fontSize: 3.w,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
@@ -28,7 +28,7 @@ Widget enterNum(String number, BuildContext context) {
                 '+91 $number',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 3.0.h,
+                  fontSize: 4.w,
                   color: Colors.white,
                 ),
               ),
@@ -39,13 +39,13 @@ Widget enterNum(String number, BuildContext context) {
       SizedBox(width: 5.0.w),
       Expanded(
         child: InkWell(
-          onTap: () {
-            //if (number.length == 10) {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => VerifyPhone(phoneNumber: number)));
-            //  }
+          onTap: () async {
+            if (number.length == 10) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => VerifyPhone(phoneNumber: number)));
+            }
           },
           child: Container(
             decoration: BoxDecoration(
@@ -56,12 +56,12 @@ Widget enterNum(String number, BuildContext context) {
             ),
             child: SizedBox(
               width: 3.w,
-              height: 7.h,
+              height: 5.h,
               child: Center(
                 child: Text(
                   'Continue',
                   style: TextStyle(
-                    fontSize: 5.w,
+                    fontSize: 4.w,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
