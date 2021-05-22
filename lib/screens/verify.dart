@@ -1,5 +1,7 @@
+import 'package:athijeevana/screens/home.dart';
 import 'package:athijeevana/widgets/NumberCodeBox.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -13,31 +15,76 @@ class VerifyPhone extends StatefulWidget {
 }
 
 class _VerifyPhoneState extends State<VerifyPhone> {
+  late String _verificationID;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   String otp = "";
   void otpManage(int value) {
     setState(() {
-      if (otp.length == 7 && value != -1) {
-        print("Success");
-      } else {
-        switch (value) {
-          case -1:
-            if (otp.length != 0) {
-              otp = otp.substring(0, otp.length - 1);
-            }
+      switch (value) {
+        case -1:
+          if (otp.length != 0) {
+            otp = otp.substring(0, otp.length - 1);
+          }
 
-            break;
-          default:
-            if (otp.length != 7) {
-              otp = otp + value.toString();
-            }
-        }
+          break;
+        default:
+          if (otp.length != 7) {
+            otp = otp + value.toString();
+          }
       }
     });
+  }
+
+  _verifyPhone() async {
+    /*await FirebaseAuth.instance.verifyPhoneNumber(
+      phoneNumber: "+91" + widget.phoneNumber,
+      verificationCompleted: (PhoneAuthCredential credential) {},
+      verificationFailed: (FirebaseAuthException e) {},
+      codeAutoRetrievalTimeout: (String verificationId) {},
+      codeSent: (String verificationId, int? forceResendingToken) {},
+    );*/
+
+    await FirebaseAuth.instance.verifyPhoneNumber(
+        phoneNumber: '+91' + widget.phoneNumber,
+        verificationCompleted: (PhoneAuthCredential authCredential) async {
+          print("VerificationComplete");
+          await FirebaseAuth.instance
+              .signInWithCredential(authCredential)
+              .then((value) async {
+            if (value.user != null) {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => Home()),
+                  (route) => false);
+            }
+          });
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print("VerificationFailed");
+          print(e.message);
+        },
+        codeAutoRetrievalTimeout: (String verID) {
+          print("CodeAUtoR");
+          setState(() {
+            _verificationID = verID;
+          });
+        },
+        timeout: Duration(seconds: 10),
+        codeSent: (String verificationId, int? forceResendingToken) {
+          print("CodeSent");
+        });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _verifyPhone();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       backgroundColor: Colors.deepPurple[800],
       appBar: AppBar(
         title: Text(
@@ -53,7 +100,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
       body: SafeArea(
         child: OrientationBuilder(builder: (context, orientation) {
           if (orientation == Orientation.portrait) {
-            return portraitMode(context);
+            return SingleChildScrollView(child: portraitMode(context));
           } else {
             return landscapeMode(context);
           }
@@ -65,7 +112,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   Widget portraitMode(BuildContext bc) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Container(
           child: Column(
@@ -75,7 +122,7 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 child: Text(
                   "OTP has been sent to " + widget.phoneNumber,
                   style: TextStyle(
-                    fontSize: 2.h,
+                    fontSize: 3.h,
                     color: Colors.white,
                   ),
                 ),
@@ -91,6 +138,9 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                   buildCodeNumberBox(otp.length > 4 ? otp.substring(4, 5) : ""),
                   buildCodeNumberBox(otp.length > 5 ? otp.substring(5, 6) : ""),
                 ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(bc).size.height * 0.05,
               ),
               SizedBox(
                 height: MediaQuery.of(bc).size.height * 0.05,
@@ -115,29 +165,22 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   }
 
   Widget landscapeMode(BuildContext bc) {
-    return Padding(
-      padding: const EdgeInsets.all(19.0),
+    return SingleChildScrollView(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
             children: [
               Text(
-                "OTP has been sent to ",
-                style: TextStyle(
-                  fontSize: 4.w,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                widget.phoneNumber,
+                "OTP has been sent to +91 " + widget.phoneNumber,
                 style: TextStyle(
                   fontSize: 4.w,
                   color: Colors.white,
                 ),
               ),
               SizedBox(
-                height: 4.h,
+                height: 3.h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -153,6 +196,44 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               ),
             ],
           ),
+          SizedBox(
+            height: 3.h,
+          ),
+          ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: Colors.amber),
+              onPressed: () async {
+                if (otp.length == 6) {
+                  try {
+                    await FirebaseAuth.instance
+                        .signInWithCredential(
+                      PhoneAuthProvider.credential(
+                          verificationId: _verificationID, smsCode: otp),
+                    )
+                        .then((value) async {
+                      if (value.user != null) {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(builder: (context) => Home()),
+                            (route) => false);
+                      } else {
+                        print("Error @ 189");
+                      }
+                    });
+                  } catch (e) {
+                    print("From Catch");
+                    print(e);
+                  }
+                } else {
+                  print("Here");
+                }
+              },
+              child: Container(
+                padding: EdgeInsets.all(4),
+                child: Text(
+                  "Continue",
+                  style: TextStyle(fontSize: 17, color: Colors.black),
+                ),
+              )),
           Flexible(child: NumberPad(onNumSelect: (value) {
             otpManage(value);
           }))

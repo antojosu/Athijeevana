@@ -24,6 +24,8 @@ class _PhoneNumberState extends State<PhoneNumber> {
       });
     } catch (e) {
       // Set `_error` state to true if Firebase initialization fails
+      print("Error in phonenumber.dart");
+      print(e.toString());
       setState(() {
         _error = true;
       });
