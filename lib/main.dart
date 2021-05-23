@@ -1,4 +1,4 @@
-import 'package:athijeevana/screens/StartScreen.dart';
+import 'package:athijeevana/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -13,7 +13,8 @@ class AthiJeevanaMain extends StatelessWidget {
     return ResponsiveSizer(
       builder: (BuildContext, Orientation, ScreenType) {
         return MaterialApp(
-            debugShowCheckedModeBanner: false, home: StartScreen());
+            debugShowCheckedModeBanner: false,
+            home: DefaultTabController(length: 2, child: Home()));
       },
     );
   }
