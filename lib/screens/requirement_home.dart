@@ -1,3 +1,4 @@
+import 'package:athijeevana/widgets/catCard.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -7,12 +8,23 @@ class requirementCovid extends StatefulWidget {
 }
 
 class _requirementCovidState extends State<requirementCovid> {
+  List categories = ["Oxygen", "Food", "Medicines", "Plasma", "Ambulance"];
+  List<Color> colors = [
+    Colors.blue.shade100,
+    Colors.purple.shade100,
+    Colors.green.shade100,
+    Colors.amber.shade100,
+    Colors.pink.shade100,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
               height: 200,
@@ -54,6 +66,39 @@ class _requirementCovidState extends State<requirementCovid> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 10.w,
+            ),
+            Text(
+              "Most Demanded Requirement",
+              style: TextStyle(
+                  color: Colors.blueGrey[900],
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600),
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
+            SizedBox(
+              height: 15.h,
+              child: ListView.builder(
+                  itemCount: categories.length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return catCard(categories[index], colors[index]);
+                  }),
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
+            Text(
+              "Latest Requirement Request",
+              style: TextStyle(
+                  color: Colors.blueGrey[900],
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600),
+            )
           ],
         ),
       ),

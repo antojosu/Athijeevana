@@ -1,5 +1,6 @@
 import 'package:athijeevana/screens/StateStatCovid.dart';
 import 'package:athijeevana/widgets/InfoCard.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -9,6 +10,25 @@ class covidInfo extends StatefulWidget {
 }
 
 class _covidInfoState extends State<covidInfo> {
+  List<String> stats = [];
+  void getSummary() async {
+    var response =
+        await Dio().get("https://api.rootnet.in/covid19-in/stats/latest");
+    Map<String, dynamic> map = response.data['data']['summary'];
+    stats = [
+      map['total'].toString(),
+      map['confirmedCasesIndian'].toString(),
+      map['discharged'].toString(),
+      map['deaths'].toString()
+    ];
+  }
+
+  @override
+  Future<void> initState() async {
+    super.initState();
+    getSummary();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -45,17 +65,18 @@ class _covidInfoState extends State<covidInfo> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                infoCard("14M", "Total Cases", "assets/images/covid-19.png"),
-                infoCard("10599+", "New Cases", "assets/images/hazard.png"),
-                infoCard("22674", "Recovered", "assets/images/recovered.png"),
-                infoCard("240", "Death", "assets/images/dead.png"),
+                infoCard(stats[0], "Total Cases", "assets/images/covid-19.png"),
+                infoCard(stats[1], "New Cases", "assets/images/hazard.png"),
+                infoCard(stats[2], "Recovered", "assets/images/recovered.png"),
+                infoCard(stats[3], "Death", "assets/images/dead.png"),
               ],
             ),
             SizedBox(
               height: 3.h,
             ),
             GestureDetector(
-              onTap: () => CovidState(),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CovidState())),
               child: SizedBox(
                 height: 25.w,
                 width: 100.h,

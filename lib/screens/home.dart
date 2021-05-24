@@ -9,12 +9,20 @@ class Home extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        centerTitle: true,
         backgroundColor: Colors.white,
         title: Text(
           "Athijeevana",
           style: TextStyle(color: Colors.blueGrey[900]),
         ),
+        actions: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(
+              Icons.logout,
+              color: Colors.black,
+            ),
+          )
+        ],
         bottom: TabBar(
           indicatorColor: Colors.orangeAccent,
           tabs: [
