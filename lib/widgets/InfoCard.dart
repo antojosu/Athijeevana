@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
-Widget infoCard(String value, String type, Icon icon) {
+Widget infoCard(String value, String type, String img) {
   return SizedBox(
-    height: 110,
-    width: 110,
+    height: 12.h,
+    width: 12.h,
     child: Container(
       decoration: new BoxDecoration(
         color: Colors.white,
@@ -11,8 +12,8 @@ Widget infoCard(String value, String type, Icon icon) {
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
-            blurRadius: 5.0, // soften the shadow
-            spreadRadius: 5.0, //extend the shadow
+            blurRadius: 15.0,
+            spreadRadius: 3.0,
             offset: Offset(
               1,
               1,
@@ -23,7 +24,10 @@ Widget infoCard(String value, String type, Icon icon) {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          icon,
+          Image.asset(
+            img,
+            height: 5.h,
+          ),
           Text(
             value,
             style: TextStyle(fontWeight: FontWeight.w700),

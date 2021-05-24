@@ -1,4 +1,5 @@
 import 'package:athijeevana/screens/covid_info.dart';
+import 'package:athijeevana/screens/requirement_home.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -51,7 +52,7 @@ class Home extends StatelessWidget {
         ),
       ),
       body: TabBarView(
-        children: [Icon(Icons.ac_unit_rounded), covidInfo()],
+        children: [requirementCovid(), covidInfo()],
       ),
     );
   }
