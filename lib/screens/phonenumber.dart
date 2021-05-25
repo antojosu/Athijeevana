@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:athijeevana/screens/home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:athijeevana/widgets/EnterNumberWidget.dart';
@@ -12,43 +14,10 @@ class PhoneNumber extends StatefulWidget {
 }
 
 class _PhoneNumberState extends State<PhoneNumber> {
-  bool _initialized = false;
-  bool _error = false;
   String number = "";
-  void initializeFlutterFire() async {
-    try {
-      // Wait for Firebase to initialize and set `_initialized` state to true
-      await Firebase.initializeApp();
-      setState(() {
-        _initialized = true;
-      });
-    } catch (e) {
-      // Set `_error` state to true if Firebase initialization fails
-      print("Error in phonenumber.dart");
-      print(e.toString());
-      setState(() {
-        _error = true;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    initializeFlutterFire();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (_error) {
-      return Text("Error");
-    }
-
-    // Show a loader until FlutterFire is initialized
-    if (!_initialized) {
-      return Text("Loading");
-    }
-
     return Scaffold(
       backgroundColor: Colors.deepPurple[800],
       appBar: AppBar(

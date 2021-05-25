@@ -203,7 +203,8 @@ class _VerifyPhoneState extends State<VerifyPhone> {
               style: ElevatedButton.styleFrom(primary: Colors.amber),
               onPressed: () async {
                 if (otp.length >= 6) {
-                  otp = otp.substring(0, 5);
+                  otp = otp.substring(0, 6);
+                  print(otp);
                   try {
                     await FirebaseAuth.instance
                         .signInWithCredential(
