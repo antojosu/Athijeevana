@@ -1,8 +1,18 @@
 import 'package:athijeevana/screens/covid_info.dart';
+import 'package:athijeevana/screens/phonenumber.dart';
 import 'package:athijeevana/screens/requirement_home.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
+  Future<void> _signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => PhoneNumber()),
+        (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -17,11 +27,14 @@ class Home extends StatelessWidget {
             style: TextStyle(color: Colors.blueGrey[900]),
           ),
           actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(
-                Icons.person,
-                color: Colors.black,
+            GestureDetector(
+              onTap: () => _signOut(context),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.person,
+                  color: Colors.black,
+                ),
               ),
             )
           ],

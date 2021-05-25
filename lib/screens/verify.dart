@@ -144,6 +144,61 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(primary: Colors.amber),
+                      onPressed: () async {
+                        if (otp.length >= 6) {
+                          otp = otp.substring(0, 6);
+                          print(otp);
+                          try {
+                            await FirebaseAuth.instance
+                                .signInWithCredential(
+                              PhoneAuthProvider.credential(
+                                  verificationId: _verificationID,
+                                  smsCode: otp),
+                            )
+                                .then((value) async {
+                              if (value.user != null) {
+                                FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(value.user!.uid.toString())
+                                    .get()
+                                    .then((DocumentSnapshot documentSnapshot) {
+                                  if (documentSnapshot.exists) {
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Home()),
+                                        (route) => false);
+                                  } else {
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                UserCollect()),
+                                        (route) => false);
+                                  }
+                                });
+                              } else {
+                                print("Error @ 189");
+                              }
+                            });
+                          } catch (e) {
+                            print("From Catch");
+                            print(e);
+                          }
+                        } else {
+                          print(otp.length);
+                          print("Here");
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(4),
+                        child: Text(
+                          "Continue",
+                          style: TextStyle(fontSize: 17, color: Colors.black),
+                        ),
+                      )),
                   Flexible(
                     child: NumberPad(onNumSelect: (value) {
                       otpManage(value);

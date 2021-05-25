@@ -3,6 +3,7 @@ import 'package:athijeevana/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class UserCollect extends StatefulWidget {
@@ -69,7 +70,21 @@ class _UserCollectState extends State<UserCollect> {
                     height: 3.h,
                   ),
                   ElevatedButton(
-                      onPressed: submitData,
+                      onPressed: () {
+                        if (myController.text.isNotEmpty &&
+                            myController1.text.isNotEmpty) {
+                          submitData();
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Fill all details",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        }
+                      },
                       child: Container(
                         child: Text("Continue"),
                       ))
@@ -80,3 +95,10 @@ class _UserCollectState extends State<UserCollect> {
         ));
   }
 }
+/*
+validator: (value) {
+                    if (value.isEmpty) {
+                      return "Please Fill";
+                    }
+                    return null;
+                  }),*/
