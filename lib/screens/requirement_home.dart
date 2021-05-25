@@ -1,3 +1,4 @@
+import 'package:athijeevana/screens/RequirementCat.dart';
 import 'package:athijeevana/screens/requestRequirement.dart';
 import 'package:athijeevana/widgets/catCard.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +10,8 @@ class requirementCovid extends StatefulWidget {
 }
 
 class _requirementCovidState extends State<requirementCovid> {
-  List categories = ["Oxygen", "Food", "Medicines", "Plasma", "Ambulance"];
+  List categories = ["Food", "Oxygen", "Medicine", "Plasma", "Ambulance"];
+
   List<Color> colors = [
     Colors.blue.shade100,
     Colors.purple.shade100,
@@ -68,29 +70,6 @@ class _requirementCovidState extends State<requirementCovid> {
               ),
             ),
             SizedBox(
-              height: 10.w,
-            ),
-            Text(
-              "Most Demanded Requirement",
-              style: TextStyle(
-                  color: Colors.blueGrey[900],
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: 3.h,
-            ),
-            SizedBox(
-              height: 15.h,
-              child: ListView.builder(
-                  itemCount: categories.length,
-                  scrollDirection: Axis.horizontal,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    return catCard(categories[index], colors[index]);
-                  }),
-            ),
-            SizedBox(
               height: 3.h,
             ),
             Row(
@@ -113,7 +92,63 @@ class _requirementCovidState extends State<requirementCovid> {
                           builder: (context) => RequestRequirement())),
                 )
               ],
-            )
+            ),
+            SizedBox(
+              height: 3.h,
+            ),
+            SizedBox(
+              height: 15.h,
+              child: ListView.builder(
+                  itemCount: categories.length,
+                  scrollDirection: Axis.horizontal,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      RequirementCat(cat: categories[index])));
+                        },
+                        child: catCard(categories[index], colors[index]));
+                  }),
+            ),
+            /*StreamBuilder<QuerySnapshot>(
+              stream: _usersStream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Something went wrong');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Text("Loading");
+                }
+                if (snapshot.hasData) {
+                  return SizedBox(
+                    height: 100.h,
+                    child: new ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children:
+                          snapshot.data!.docs.map((DocumentSnapshot document) {
+                        return SizedBox(
+                          height: 100,
+                          child: new ListTile(
+                            title: new Text(
+                                (document.data() as dynamic)['fullname']),
+                            subtitle: new Text(
+                                (document.data() as dynamic)['category']),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  );
+                } else {
+                  return Text("No Data");
+                }
+              },
+            )*/
           ],
         ),
       ),

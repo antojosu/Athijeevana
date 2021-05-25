@@ -2,34 +2,41 @@ import 'package:athijeevana/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:group_radio_button/group_radio_button.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class RequestRequirement extends StatelessWidget {
+class RequestRequirement extends StatefulWidget {
+  @override
+  _RequestRequirementState createState() => _RequestRequirementState();
+}
+
+class _RequestRequirementState extends State<RequestRequirement> {
   late String name, place, category, description;
+
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   final myController = TextEditingController();
 
   final myController1 = TextEditingController();
+
   final myController2 = TextEditingController();
 
-  final myController3 = TextEditingController();
+  String _categoryValue = "Food";
+  List<String> _status = ["Food", "Ambulance", "Bed", "Medicine", "Plasma"];
   void submitData(BuildContext context) {
     name = myController.text;
     place = myController1.text;
-    category = myController2.text.toLowerCase();
-    description = myController3.text;
+    description = myController2.text;
     var uid = auth.currentUser!.uid;
     var phonenumber = auth.currentUser!.phoneNumber;
-    category = category.trim();
     DocumentReference<Map<String, dynamic>> request =
-        FirebaseFirestore.instance.collection('requirement').doc(category);
+        FirebaseFirestore.instance.collection(_categoryValue).doc(uid);
     var myJSONObj = {
       "uid": uid,
       "fullname": name,
       "place": place,
-      "category": category,
+      "category": _categoryValue,
       "description": description,
       "phone": phonenumber
     };
@@ -56,6 +63,7 @@ class RequestRequirement extends StatelessWidget {
         child: Container(
           padding: EdgeInsets.all(15),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 controller: myController,
@@ -73,17 +81,29 @@ class RequestRequirement extends StatelessWidget {
               SizedBox(
                 height: 3.h,
               ),
-              TextFormField(
-                controller: myController2,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Requirement Category'),
+              Text(
+                "Requirement Category",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              RadioGroup<String>.builder(
+                groupValue: _categoryValue,
+                onChanged: (value) => setState(() {
+                  _categoryValue = value!;
+                }),
+                items: _status,
+                itemBuilder: (item) => RadioButtonBuilder(
+                  item,
+                ),
+                activeColor: Colors.red,
               ),
               SizedBox(
                 height: 3.h,
               ),
               TextFormField(
-                controller: myController3,
+                controller: myController2,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), hintText: 'Description'),
               ),
@@ -94,8 +114,7 @@ class RequestRequirement extends StatelessWidget {
                   onPressed: () {
                     if (myController.text.isNotEmpty &&
                         myController1.text.isNotEmpty &&
-                        myController2.text.isNotEmpty &&
-                        myController3.text.isNotEmpty) {
+                        myController2.text.isNotEmpty) {
                       submitData(context);
                     } else {
                       Fluttertoast.showToast(

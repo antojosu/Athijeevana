@@ -1,8 +1,6 @@
 import 'package:athijeevana/screens/home.dart';
 import 'package:athijeevana/screens/phonenumber.dart';
 import 'package:athijeevana/services/firebase_auth.dart';
-import 'package:athijeevana/services/firebase_cloud.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {

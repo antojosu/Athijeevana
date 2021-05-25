@@ -50,7 +50,20 @@ class _AthiJeevanaMainState extends State<AthiJeevanaMain> {
       return MaterialApp(home: Text("Error"));
     }
     if (!_initialized) {
-      return MaterialApp(home: Text("Loading"));
+      return MaterialApp(
+          home: Scaffold(
+              body: SafeArea(
+        child: Container(
+            height: 100,
+            width: 100,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+                Text("Loading"),
+              ],
+            )),
+      )));
     }
     return ResponsiveSizer(
       builder: (BuildContext, Orientation, ScreenType) {
