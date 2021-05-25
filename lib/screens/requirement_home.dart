@@ -1,3 +1,4 @@
+import 'package:athijeevana/screens/requestRequirement.dart';
 import 'package:athijeevana/widgets/catCard.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -92,12 +93,26 @@ class _requirementCovidState extends State<requirementCovid> {
             SizedBox(
               height: 3.h,
             ),
-            Text(
-              "Latest Requirement Request",
-              style: TextStyle(
-                  color: Colors.blueGrey[900],
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Latest Requirement Request",
+                  style: TextStyle(
+                      color: Colors.blueGrey[900],
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600),
+                ),
+                ElevatedButton(
+                  child: Container(
+                    child: FittedBox(child: Text("Add New Request")),
+                  ),
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RequestRequirement())),
+                )
+              ],
             )
           ],
         ),
