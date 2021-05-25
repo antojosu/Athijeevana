@@ -48,7 +48,12 @@ class _CovidStateState extends State<CovidState> {
                     }),
                   );
                 } else {
-                  return Container();
+                  return Center(
+                      child: Container(
+                    height: 100,
+                    width: 100,
+                    child: CircularProgressIndicator(),
+                  ));
                 }
               }),
         ),

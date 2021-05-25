@@ -1,6 +1,8 @@
 import 'package:athijeevana/screens/home.dart';
+import 'package:athijeevana/screens/userDataCollect.dart';
 import 'package:athijeevana/widgets/NumberCodeBox.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -36,14 +38,6 @@ class _VerifyPhoneState extends State<VerifyPhone> {
   }
 
   _verifyPhone() async {
-    /*await FirebaseAuth.instance.verifyPhoneNumber(
-      phoneNumber: "+91" + widget.phoneNumber,
-      verificationCompleted: (PhoneAuthCredential credential) {},
-      verificationFailed: (FirebaseAuthException e) {},
-      codeAutoRetrievalTimeout: (String verificationId) {},
-      codeSent: (String verificationId, int? forceResendingToken) {},
-    );*/
-
     await FirebaseAuth.instance.verifyPhoneNumber(
         phoneNumber: '+91' + widget.phoneNumber,
         verificationCompleted: (PhoneAuthCredential authCredential) async {
@@ -213,10 +207,24 @@ class _VerifyPhoneState extends State<VerifyPhone> {
                     )
                         .then((value) async {
                       if (value.user != null) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (context) => Home()),
-                            (route) => false);
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(value.user!.uid.toString())
+                            .get()
+                            .then((DocumentSnapshot documentSnapshot) {
+                          if (documentSnapshot.exists) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home()),
+                                (route) => false);
+                          } else {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => UserCollect()),
+                                (route) => false);
+                          }
+                        });
                       } else {
                         print("Error @ 189");
                       }

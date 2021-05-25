@@ -131,7 +131,12 @@ class _covidInfoState extends State<covidInfo> {
               ),
             );
           } else {
-            return Container();
+            return Center(
+                child: Container(
+              height: 100,
+              width: 100,
+              child: CircularProgressIndicator(),
+            ));
           }
         });
   }
