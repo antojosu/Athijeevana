@@ -2,9 +2,9 @@
 # Athijeevana
 Long Description about project. This project do that. This project is awesome...
 ## Team members
-1. [Anto Josu]: https://github.com/antojosu
-2. [Alex Benoy]: https://github.com/AlexBenoy
-3. [Athul KR]: https://github.com/chipp7
+1. [Anto Josu]
+2. [Alex Benoy]
+3. [Athul KR]
 ## Team Id
 BFH/recAxxIJKZU0vW6vc/2021
 ## Link to product walkthrough
@@ -18,3 +18,7 @@ Library Name - Version
 Instructions for setting up project
 ## How to Run
 Instructions for running
+
+[Anto Josu]: https://github.com/antojosu
+[Alex Benoy]: https://github.com/AlexBenoy
+[Athul KR]: https://github.com/chipp7
