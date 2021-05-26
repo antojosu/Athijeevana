@@ -25,23 +25,33 @@ class _UserPageState extends State<UserPage> {
 
   Future<List<requirement>> getData() async {
     List<requirement> requirements = [];
-
-    await FirebaseFirestore.instance
-        .collection("Food")
-        .doc(auth.currentUser!.uid)
-        .get()
-        .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        var description = (documentSnapshot.data() as dynamic)['description'];
-        var place = (documentSnapshot.data() as dynamic)['place'];
-        var category = (documentSnapshot.data() as dynamic)['category'];
-        var fullname = (documentSnapshot.data() as dynamic)['fullname'];
-        var phoneNumber = (documentSnapshot.data() as dynamic)['phone'];
-        requirement req =
-            requirement(description, place, phoneNumber, fullname, category);
-        requirements.add(req);
-      }
-    });
+    List categories = [
+      "Food",
+      "Bed",
+      "Oxygen",
+      "Medicine",
+      "Plasma",
+      "Ambulance"
+    ];
+    for (var i in categories) {
+      print(i);
+      await FirebaseFirestore.instance
+          .collection(i)
+          .doc(auth.currentUser!.uid)
+          .get()
+          .then((DocumentSnapshot documentSnapshot) {
+        if (documentSnapshot.exists) {
+          var description = (documentSnapshot.data() as dynamic)['description'];
+          var place = (documentSnapshot.data() as dynamic)['place'];
+          var category = (documentSnapshot.data() as dynamic)['category'];
+          var fullname = (documentSnapshot.data() as dynamic)['fullname'];
+          var phoneNumber = (documentSnapshot.data() as dynamic)['phone'];
+          requirement req =
+              requirement(description, place, phoneNumber, fullname, category);
+          requirements.add(req);
+        }
+      });
+    }
 
     return requirements;
   }
@@ -135,7 +145,7 @@ class _UserPageState extends State<UserPage> {
                               List.generate(snapshot.data.length, (index) {
                             return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: userCard(snapshot.data[index]),
+                              child: userCard(snapshot.data[index], context),
                             );
                           }),
                         );

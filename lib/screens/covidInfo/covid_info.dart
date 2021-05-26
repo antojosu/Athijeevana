@@ -1,3 +1,4 @@
+import 'package:athijeevana/screens/covidInfo/StateCovidHelpline.dart';
 import 'package:athijeevana/screens/covidInfo/StateStatCovid.dart';
 import 'package:athijeevana/widgets/InfoCard.dart';
 import 'package:dio/dio.dart';
@@ -42,6 +43,56 @@ class _covidInfoState extends State<covidInfo> {
                 children: [
                   SizedBox(
                     height: 2.h,
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HelpLine())),
+                    child: SizedBox(
+                      height: 25.w,
+                      width: 100.h,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.green.shade400,
+                              blurRadius: 15.0,
+                              offset: Offset(
+                                1,
+                                1,
+                              ),
+                            )
+                          ],
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          gradient: LinearGradient(colors: [
+                            Colors.green.shade800,
+                            Colors.greenAccent.shade700,
+                            Colors.lightGreen,
+                          ]),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Row(
+                            children: [
+                              Image.asset("assets/images/covid-19.png"),
+                              SizedBox(
+                                width: 3.h,
+                              ),
+                              Text(
+                                "Check State Covid helpline numbers",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18),
+                                overflow: TextOverflow.fade,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 3.h,
                   ),
                   Row(
                     children: [
