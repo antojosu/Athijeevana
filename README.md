@@ -2,11 +2,11 @@
 # Athijeevana
 Long Description about project. This project do that. This project is awesome...
 ## Team members
-1. Anto Josu [Embed personal github URL]
-2. Alex Benoy [Embed perosnal github URL]
-3. Athul KR https://github.com/chipp7
+1. [Anto Josu]: https://github.com/antojosu
+2. [Alex Benoy]: https://github.com/AlexBenoy
+3. [Athul KR]: https://github.com/chipp7
 ## Team Id
-Team id here
+BFH/recAxxIJKZU0vW6vc/2021
 ## Link to product walkthrough
 [link to video]
 ## How it Works ?
