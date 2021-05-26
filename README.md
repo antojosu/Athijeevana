@@ -1,6 +1,6 @@
 ![BFH Banner](https://trello-attachments.s3.amazonaws.com/542e9c6316504d5797afbfb9/542e9c6316504d5797afbfc1/39dee8d993841943b5723510ce663233/Frame_19.png)
 # Athijeevana
-Long Description about project. This project do that. This project is awesome...
+Athijeeva is an App where people can add requirements needed in the covid situation like oxygen supply, food etc. and can have covid stats and mosted needed helpline numbers near finger tip. Also, users should be able to see requirements around them and contact them. Users should create an account before posting the requirement.
 ## Team members
 1. [Anto Josu]
 2. [Alex Benoy]
@@ -13,11 +13,21 @@ BFH/recAxxIJKZU0vW6vc/2021
 1. Step 1
 2. Step 2
 ## Libraries used
-Library Name - Version
+
+  cupertino_icons: 1.0.2
+  responsive_sizer: 2.0.1
+  firebase_core: "1.2.0"
+  firebase_auth: 1.2.0
+  cloud_firestore: "2.2.0"
+  dio: 4.0.0
+  fluttertoast: 8.0.7
+  group_radio_button: 1.1.0
+  url_launcher: 6.0.4
+  
 ## How to configure
-Instructions for setting up project
+Clone this project and setup a firebase account and enable phone authentication and firestore.
 ## How to Run
-Instructions for running
+Open the project in the IDE and run "flutter pub get" then connect the emulator or the phone and press F5.
 
 [Anto Josu]: https://github.com/antojosu
 [Alex Benoy]: https://github.com/AlexBenoy
