@@ -11,8 +11,9 @@ BFH/recAxxIJKZU0vW6vc/2021
 https://loom.com/share/folder/74aa90d64ace4b9c9e2bccef3b20b449
 [link to video]
 ## How it Works ?
-1. Step 1
-2. Step 2
+1. Enter the phone number when app launches
+2. Wait and enter the OTP
+3. Complete the Registration
 ## Libraries used
 
   cupertino_icons: 1.0.2
