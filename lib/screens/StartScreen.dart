@@ -1,4 +1,4 @@
-import 'package:athijeevana/screens/phonenumber.dart';
+import 'package:athijeevana/screens/authentication/phonenumber.dart';
 import 'package:flutter/material.dart';
 
 class StartScreen extends StatelessWidget {

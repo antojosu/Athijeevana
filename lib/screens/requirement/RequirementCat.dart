@@ -54,6 +54,7 @@ class _RequirementCatState extends State<RequirementCat> {
                         return SizedBox(
                             height: 25.h,
                             child: requirementCard(
+                              (document.data() as dynamic)['place'],
                               (document.data() as dynamic)['description'],
                               (document.data() as dynamic)['fullname'],
                               (document.data() as dynamic)['category'],

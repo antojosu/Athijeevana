@@ -1,5 +1,5 @@
 import 'package:athijeevana/screens/home.dart';
-import 'package:athijeevana/screens/userDataCollect.dart';
+import 'package:athijeevana/screens/authentication/userDataCollect.dart';
 import 'package:athijeevana/widgets/NumberCodeBox.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

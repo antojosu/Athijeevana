@@ -1,5 +1,5 @@
-import 'package:athijeevana/screens/RequirementCat.dart';
-import 'package:athijeevana/screens/requestRequirement.dart';
+import 'package:athijeevana/screens/requirement/RequirementCat.dart';
+import 'package:athijeevana/screens/requirement/requestRequirement.dart';
 import 'package:athijeevana/widgets/catCard.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -10,11 +10,19 @@ class requirementCovid extends StatefulWidget {
 }
 
 class _requirementCovidState extends State<requirementCovid> {
-  List categories = ["Food", "Oxygen", "Medicine", "Plasma", "Ambulance"];
+  List categories = [
+    "Food",
+    "Bed",
+    "Oxygen",
+    "Medicine",
+    "Plasma",
+    "Ambulance"
+  ];
 
   List<Color> colors = [
     Colors.blue.shade100,
     Colors.purple.shade100,
+    Colors.lime,
     Colors.green.shade100,
     Colors.amber.shade100,
     Colors.pink.shade100,
@@ -114,41 +122,6 @@ class _requirementCovidState extends State<requirementCovid> {
                         child: catCard(categories[index], colors[index]));
                   }),
             ),
-            /*StreamBuilder<QuerySnapshot>(
-              stream: _usersStream,
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasError) {
-                  return Text('Something went wrong');
-                }
-
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Text("Loading");
-                }
-                if (snapshot.hasData) {
-                  return SizedBox(
-                    height: 100.h,
-                    child: new ListView(
-                      physics: NeverScrollableScrollPhysics(),
-                      children:
-                          snapshot.data!.docs.map((DocumentSnapshot document) {
-                        return SizedBox(
-                          height: 100,
-                          child: new ListTile(
-                            title: new Text(
-                                (document.data() as dynamic)['fullname']),
-                            subtitle: new Text(
-                                (document.data() as dynamic)['category']),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  );
-                } else {
-                  return Text("No Data");
-                }
-              },
-            )*/
           ],
         ),
       ),

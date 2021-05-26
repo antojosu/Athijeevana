@@ -23,7 +23,14 @@ class _RequestRequirementState extends State<RequestRequirement> {
   final myController2 = TextEditingController();
 
   String _categoryValue = "Food";
-  List<String> _status = ["Food", "Ambulance", "Bed", "Medicine", "Plasma"];
+  List<String> _status = [
+    "Food",
+    "Ambulance",
+    "Bed",
+    "Medicine",
+    "Oxygen",
+    "Plasma"
+  ];
   void submitData(BuildContext context) {
     name = myController.text;
     place = myController1.text;

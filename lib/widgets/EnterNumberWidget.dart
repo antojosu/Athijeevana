@@ -1,4 +1,4 @@
-import 'package:athijeevana/screens/verify.dart';
+import 'package:athijeevana/screens/authentication/verify.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 

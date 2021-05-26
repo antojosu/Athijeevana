@@ -1,4 +1,4 @@
-import 'package:athijeevana/screens/StateStatCovid.dart';
+import 'package:athijeevana/screens/covidInfo/StateStatCovid.dart';
 import 'package:athijeevana/widgets/InfoCard.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-Future<void> _makePhoneCall(String url) async {
+Future<void> _delReq(String url) async {
   print(url);
   if (await canLaunch(url)) {
     await launch(url);
@@ -11,8 +11,7 @@ Future<void> _makePhoneCall(String url) async {
   }
 }
 
-Widget requirementCard(String place, String description, String fullname,
-    String category, String phoneNumber) {
+Widget userCard(dynamic snapshot) {
   return Container(
     padding: EdgeInsets.all(15),
     decoration: BoxDecoration(
@@ -23,11 +22,8 @@ Widget requirementCard(String place, String description, String fullname,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(description, style: TextStyle(color: Colors.white, fontSize: 4.w)),
-        SizedBox(height: 2.w),
-        Text(place, style: TextStyle(color: Colors.white, fontSize: 18)),
-        Text("Posted by " + fullname,
-            style: TextStyle(color: Colors.white, fontSize: 15)),
+        Text(snapshot.description,
+            style: TextStyle(color: Colors.white, fontSize: 18)),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -35,10 +31,10 @@ Widget requirementCard(String place, String description, String fullname,
                 style: ElevatedButton.styleFrom(
                   primary: Colors.white,
                 ),
-                onPressed: () => _makePhoneCall("tel:" + phoneNumber),
+                onPressed: () => _delReq("tel:" + snapshot.description),
                 child: Container(
                   child: Text(
-                    "Call Now",
+                    "Delete",
                     style: TextStyle(color: Colors.pink),
                   ),
                 ))

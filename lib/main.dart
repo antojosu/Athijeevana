@@ -1,5 +1,5 @@
 import 'package:athijeevana/screens/home.dart';
-import 'package:athijeevana/screens/phonenumber.dart';
+import 'package:athijeevana/screens/authentication/phonenumber.dart';
 import 'package:athijeevana/services/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,23 +47,29 @@ class _AthiJeevanaMainState extends State<AthiJeevanaMain> {
   @override
   Widget build(BuildContext context) {
     if (_error) {
-      return MaterialApp(home: Text("Error"));
+      return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: Scaffold(
+              body: SafeArea(
+            child: Container(height: 100, width: 100, child: Text("Error")),
+          )));
     }
     if (!_initialized) {
       return MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: Scaffold(
               body: SafeArea(
-        child: Container(
-            height: 100,
-            width: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircularProgressIndicator(),
-                Text("Loading"),
-              ],
-            )),
-      )));
+            child: Container(
+                height: 100,
+                width: 100,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(),
+                    Text("Loading"),
+                  ],
+                )),
+          )));
     }
     return ResponsiveSizer(
       builder: (BuildContext, Orientation, ScreenType) {

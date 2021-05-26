@@ -1,4 +1,3 @@
-import 'package:athijeevana/model/user.dart';
 import 'package:athijeevana/screens/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -95,10 +94,3 @@ class _UserCollectState extends State<UserCollect> {
         ));
   }
 }
-/*
-validator: (value) {
-                    if (value.isEmpty) {
-                      return "Please Fill";
-                    }
-                    return null;
-                  }),*/

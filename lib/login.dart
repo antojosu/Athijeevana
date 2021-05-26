@@ -1,5 +1,5 @@
 import 'package:athijeevana/screens/home.dart';
-import 'package:athijeevana/screens/phonenumber.dart';
+import 'package:athijeevana/screens/authentication/phonenumber.dart';
 import 'package:athijeevana/services/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

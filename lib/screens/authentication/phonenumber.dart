@@ -1,7 +1,4 @@
 import 'dart:ui';
-import 'package:athijeevana/screens/home.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:athijeevana/widgets/EnterNumberWidget.dart';
 import 'package:athijeevana/widgets/NumberPad.dart';
